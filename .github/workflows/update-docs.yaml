@@ -30,7 +30,7 @@ jobs:
         run: node update-docs.js
 
       - name: Commit and push changes
-        working-directory: gateway-docs
+        working-directory: poc-docs-repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
