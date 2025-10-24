@@ -1,0 +1,23 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: new-service
+    url: http://mockbin.org/request
+    retries: 3
+    connect_timeout: 5000
+    write_timeout: 5000
+    read_timeout: 10000
+    doc_url: https://karavela-portal.stone.tech/catalog/banking/api/baas-api/definition
+    tags:
+      - example
+      - mock
+    routes:
+      - name: my-service-route
+        paths:
+          - /my-service
+        methods:
+          - GET
+          - POST
+        strip_path: true
+        preserve_host: false
