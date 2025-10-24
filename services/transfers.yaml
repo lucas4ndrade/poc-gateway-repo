@@ -1,0 +1,23 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: baas-core-api
+    url: http://baas.core.internal
+    retries: 3
+    connect_timeout: 5000
+    write_timeout: 5000
+    read_timeout: 10000
+    doc_url: https://karavela-portal.stone.tech/catalog/stone/api/banking-transfers-transfers-v5-rest/definition
+    tags:
+      - example
+      - mock
+    routes:
+      - name: baas-core-api-route
+        paths:
+          - /platform/v5/accounts/(?<account_id>\S+)/transfers
+        methods:
+          - GET
+          - POST
+        strip_path: true
+        preserve_host: false

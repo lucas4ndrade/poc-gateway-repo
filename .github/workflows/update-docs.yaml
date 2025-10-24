@@ -1,0 +1,43 @@
+name: Update Gateway Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout gateway repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install js-yaml
+
+      - name: Clone gateway-docs repo
+        run: |
+          git clone https://x-access-token:${{ secrets.DOCS_REPO_TOKEN }}@github.com/lucas4ndrade/poc-docs-repo.git
+          ls poc-docs-repo/docs
+
+      - name: Update documentation table
+        run: node update-docs.js
+
+      - name: Commit and push changes
+        working-directory: gateway-docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/table.md
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update gateway service documentation table"
+            git push
+          else
+            echo "✅ No changes to commit."
+          fi
