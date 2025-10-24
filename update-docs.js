@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import yaml from "js-yaml";
 
-const DOCS_REPO_PATH = "./gateway-docs";
+const DOCS_REPO_PATH = "./poc-docs-repo";
 const TABLE_FILE = path.join(DOCS_REPO_PATH, "docs", "table.md");
 
 function getAllServiceDocs(servicesDir) {
