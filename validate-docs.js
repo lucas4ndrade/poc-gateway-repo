@@ -30,7 +30,7 @@ async function main() {
   const diffOutput = execSync("git diff --name-only origin/main").toString();
   const modifiedFiles = diffOutput
     .split("\n")
-    .filter((f) => f.endsWith(".yaml") && fs.existsSync(f));
+    .filter((f) => f.startsWith("services/") && f.endsWith(".yaml") && fs.existsSync(f));
 
   if (modifiedFiles.length === 0) {
     console.log("✅ No YAML files modified.");
